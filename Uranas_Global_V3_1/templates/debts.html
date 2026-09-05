@@ -1,0 +1,6 @@
+{% extends 'base.html' %}{% block content %}
+<div class="head"><div><span>URANAS GLOBAL</span><h1>Debts & Payments</h1></div></div>
+<div class="tabs"><a href="/admin/debts?status=all">All</a><a href="/admin/debts?status=overdue">Overdue</a><a href="/admin/debts?status=due">Due</a><a href="/admin/debts?status=paid">Paid</a></div>
+<section><h2>Outstanding / historical invoices</h2><p><strong>Balance shown: KSh {{'{:,.2f}'.format(total)}}</strong></p>
+<table><tr><th>Client</th><th>Description</th><th>Due</th><th>Total</th><th>Paid</th><th>Balance</th><th>Status</th></tr>
+{% for i in invoices %}<tr><td><a href="/admin/clients/{{i.client_id}}">{{i.client.name}}</a></td><td>{{i.description}}</td><td>{{i.due_date.strftime('%d %b %Y') if i.due_date else '—'}}</td><td>KSh {{'{:,.2f}'.format(i.total)}}</td><td>KSh {{'{:,.2f}'.format(i.paid)}}</td><td>KSh {{'{:,.2f}'.format(i.balance)}}</td><td class="{{i.status|lower}}">{{i.status}}</td></tr>{% else %}<tr><td colspan="7">No records found.</td></tr>{% endfor %}</table></section>{% endblock %}

@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block content %}<section class="formbox"><span>URANAS GLOBAL</span><h1>Check your phone</h1><p>We've sent an M-Pesa payment prompt to your phone. Enter your M-Pesa PIN to complete the payment.</p><div id="status">Waiting for payment confirmation…</div><script>
+async function check(){const r=await fetch("/payment-status/{{transaction.id}}");const x=await r.json();if(x.status==="Completed"){document.getElementById("status").innerHTML='Payment received. <a class="button primary" href="'+x.receipt_url+'">View receipt</a>'}else if(x.status==="Failed"){document.getElementById("status").textContent="Payment was not completed: "+x.description}else setTimeout(check,3000)}check();
+</script></section>{% endblock %}
