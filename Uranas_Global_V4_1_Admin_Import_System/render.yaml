@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: uranas-global-v4-1
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: uranas-data
+      mountPath: /opt/render/project/src
+      sizeGB: 1
