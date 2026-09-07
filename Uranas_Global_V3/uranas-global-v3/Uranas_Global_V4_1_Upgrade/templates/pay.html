@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Pay Uranas Global{% endblock %}{% block content %}
+<section class="formbox"><span>URANAS GLOBAL</span><h1>Pay your invoice</h1><p>Invoice <b>{{invoice.invoice_no}}</b> · Balance <b>KSh {{ "{:,.2f}".format(invoice.balance) }}</b></p>
+<p>Pay securely using M-Pesa. The payment prompt will appear on your phone.</p><form method="post" action="/pay/{{invoice.id}}/stk"><label>M-Pesa phone number<input name="phone" placeholder="07XXXXXXXX" required></label><label>Amount (KSh)<input name="amount" type="number" min="1" max="{{invoice.balance}}" step="1" value="{{invoice.balance}}" required></label><button class="primary">Send M-Pesa Prompt</button></form><small>M-Pesa Till: {{till}}</small></section>{% endblock %}

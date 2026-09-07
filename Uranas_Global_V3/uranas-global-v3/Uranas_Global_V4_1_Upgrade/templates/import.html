@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% block content %}
+<div class="head"><div><span>URANAS GLOBAL</span><h1>Import Client & Payment Data</h1></div></div>
+<section><p>Use this page to import the January–August payment workbook and the separate client/contact list. Existing clients are matched by normalized name to reduce duplicates. Historical PAID, PENDING and CLOSED monthly records are preserved.</p>
+{% if message %}<div class="flash success">{{message}}</div>{% endif %}
+<form method="post" enctype="multipart/form-data">
+<label>Payment spreadsheet (Excel)</label><input type="file" name="payments" accept=".xlsx,.xls"><small>If left empty, the packaged January–August workbook will be used.</small>
+<label>Client/contact list (Word)</label><input type="file" name="contacts" accept=".docx"><small>If left empty, the packaged contact list will be used.</small>
+<button class="button primary" type="submit">Import / Update Data</button></form></section>
+{% endblock %}

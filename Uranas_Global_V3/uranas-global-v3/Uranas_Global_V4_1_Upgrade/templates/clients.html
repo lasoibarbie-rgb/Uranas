@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<div class="head"><div><h1>Clients</h1><p>Private client records — admin only.</p></div>
+<div><a class="button primary" href="/admin/clients/new">+ Add Client</a><a class="button" href="/admin/import/clients">📥 Import Clients</a></div></div>
+<form class="search"><input name="q" value="{{q}}" placeholder="Search client, phone or email"><button>Search</button></form>
+<section><table><tr><th>Client</th><th>Phone</th><th>Service</th><th>Location</th><th>Balance</th><th></th></tr>
+{% for c in clients %}<tr><td><a href="/admin/clients/{{c.id}}">{{c.name}}</a><small>{{c.email or ''}}</small></td><td>{{c.phone or '—'}}</td><td>{{c.service or '—'}}</td><td>{{c.location or '—'}}</td><td>KSh {{'{:,.2f}'.format(c.invoices|sum(attribute='balance'))}}</td><td><a class="button" href="/admin/clients/{{c.id}}">Open</a></td></tr>
+{% else %}<tr><td colspan="6">No clients found.</td></tr>{% endfor %}</table></section>{% endblock %}

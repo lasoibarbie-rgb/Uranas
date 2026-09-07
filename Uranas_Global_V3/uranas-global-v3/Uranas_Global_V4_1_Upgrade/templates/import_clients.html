@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}
+<div class="head"><div><span>URANAS GLOBAL</span><h1>Import Client Information</h1><p>Upload client information directly into the Uranas database.</p></div></div>
+<section class="formbox"><h2>Accepted columns</h2><p><b>Required:</b> Name</p><p><b>Optional:</b> Phone, Email, Location, Service, Notes</p>
+<p>Matching clients are updated instead of duplicated. Blank cells do not erase existing information.</p>
+<p><a class="button" href="/admin/import/clients/template">⬇ Download Client Template</a></p>
+<form method="post" enctype="multipart/form-data"><label>Client CSV / Excel file<input type="file" name="client_file" accept=".csv,.xlsx,.xls" required></label>
+<button class="button primary" type="submit">📥 Import Client Data</button></form></section>{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}{% block content %}
+<div class="head"><div><span>URANAS GLOBAL</span><h1>Website Photos</h1><p>Admin uploads here are public on the website. Client information remains private.</p></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<section class="formbox"><h2>🗑️ Add Bin Photo</h2><form method="post" enctype="multipart/form-data"><input type="hidden" name="category" value="bin">
+<label>Title<input name="title" placeholder="e.g. Uranas Sanitary Bin"></label><label>Description<textarea name="description"></textarea></label>
+<label>Photo<input type="file" name="image" accept="image/*" required></label><button class="button primary">Publish Bin Photo</button></form></section>
+<section class="formbox"><h2>🏡 Add BNB Photo</h2><form method="post" enctype="multipart/form-data"><input type="hidden" name="category" value="bnb">
+<label>Title<input name="title" placeholder="e.g. Uranas BNB — Narok"></label><label>Description<textarea name="description"></textarea></label>
+<label>Photo<input type="file" name="image" accept="image/*" required></label><button class="button primary">Publish BNB Photo</button></form></section></div>
+<section><h2>Published Photos</h2><div class="cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px">
+{% for m in media %}<article><img src="/uploads/{{m.category}}/{{m.filename}}" style="width:100%;height:180px;object-fit:cover;border-radius:10px"><h3>{{m.title or m.category|upper}}</h3><p>{{m.description or ''}}</p>
+<form method="post" action="/admin/media/{{m.id}}/delete" onsubmit="return confirm('Remove this public photo?')"><button class="delete">Remove</button></form></article>
+{% else %}<p>No public photos yet.</p>{% endfor %}</div></section>{% endblock %}
